@@ -72,12 +72,12 @@ set(generated_cubin_file_internal "/home/hxhx/darknet/haixun00/object_tracker_ro
 set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda-8.0/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS -arch=sm_30;-D__STRICT_ANSI__;-D_MWAITXINTRIN_H_INCLUDED;-D_FORCE_INLINES;;-std=c++11 ;; ) # list
 # Build specific configuration flags
-set(CUDA_NVCC_FLAGS_RELEASE  ; )
+set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(CUDA_NVCC_FLAGS_DEBUG  ; )
 set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
-set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
-set(nvcc_flags -m64) # list
-set(CUDA_NVCC_INCLUDE_ARGS "-I/usr/local/cuda-8.0/include;-I/usr/include;-I/usr/local/cuda-8.0/include;-I/usr") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_FLAGS_RELEASE  ; )
+set(nvcc_flags -m64;-DROS_PACKAGE_NAME="object_tracker_ros") # list
+set(CUDA_NVCC_INCLUDE_ARGS "-I/usr/local/cuda-8.0/include;-I/home/hxhx/darknet/haixun00/object_tracker_ros/include;-I/home/hxhx/darknet/haixun00/neural_cam_ros/msg_gen/cpp/include;-I/opt/ros/indigo/include;-I/usr/include/eigen3;-I/usr/include;-I/usr/local/cuda-8.0/include;-I/usr") # list (needs to be in quotes to handle spaces properly).
 set(format_flag "-c") # string
 
 if(build_cubin AND NOT generated_cubin_file)
@@ -87,10 +87,10 @@ endif()
 # This is the list of host compilation flags.  It C or CXX should already have
 # been chosen by FindCUDA.cmake.
 set(CMAKE_HOST_FLAGS  -std=gnu++11 -DDLIB_DISABLE_ASSERTS -DDLIB_JPEG_SUPPORT -DDLIB_USE_BLAS -DDLIB_USE_LAPACK -DDLIB_USE_CUDA -DDLIB_PNG_SUPPORT   )
-set(CMAKE_HOST_FLAGS_RELEASE -O3 -DNDEBUG)
+set(CMAKE_HOST_FLAGS_RELWITHDEBINFO -O2 -g -DNDEBUG)
 set(CMAKE_HOST_FLAGS_DEBUG -g)
 set(CMAKE_HOST_FLAGS_MINSIZEREL -Os -DNDEBUG)
-set(CMAKE_HOST_FLAGS_RELWITHDEBINFO -O2 -g -DNDEBUG)
+set(CMAKE_HOST_FLAGS_RELEASE -O3 -DNDEBUG)
 
 # Take the compiler flags and package them up to be sent to the compiler via -Xcompiler
 set(nvcc_host_compiler_flags "")

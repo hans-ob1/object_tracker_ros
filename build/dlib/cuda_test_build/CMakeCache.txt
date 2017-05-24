@@ -107,7 +107,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //No help, variable specified on the command line.
-CMAKE_PREFIX_PATH:UNINITIALIZED=
+CMAKE_PREFIX_PATH:UNINITIALIZED=/home/hxhx/darknet/haixun00/object_tracker_ros/build/devel
 
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=cuda_test

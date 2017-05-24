@@ -1,7 +1,4 @@
 FILE(REMOVE_RECURSE
-  "../msg_gen"
-  "../msg_gen"
-  "../src/object_tracker_ros/msg"
   "CMakeFiles/clean_test_results"
 )
 

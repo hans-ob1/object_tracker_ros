@@ -58,8 +58,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/dlib.dir/dnn/cublas_dlibapi.cpp.o"
   "CMakeFiles/dlib.dir/dnn/curand_dlibapi.cpp.o"
   "CMakeFiles/dlib.dir/dnn/gpu_data.cpp.o"
-  "libdlib.pdb"
-  "libdlib.a"
+  "../../lib/libdlib.pdb"
+  "../../lib/libdlib.a"
 )
 
 # Per-language clean rules from dependency scanning.

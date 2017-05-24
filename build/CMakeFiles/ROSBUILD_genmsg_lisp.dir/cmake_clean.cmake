@@ -1,14 +1,5 @@
 FILE(REMOVE_RECURSE
-  "../msg_gen"
-  "../msg_gen"
-  "../src/object_tracker_ros/msg"
   "CMakeFiles/ROSBUILD_genmsg_lisp"
-  "../msg_gen/lisp/obstacleStack.lisp"
-  "../msg_gen/lisp/_package.lisp"
-  "../msg_gen/lisp/_package_obstacleStack.lisp"
-  "../msg_gen/lisp/obstacle.lisp"
-  "../msg_gen/lisp/_package.lisp"
-  "../msg_gen/lisp/_package_obstacle.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

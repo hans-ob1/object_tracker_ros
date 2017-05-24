@@ -59,13 +59,13 @@ CMAKE_BINARY_DIR = /home/hxhx/darknet/haixun00/object_tracker_ros/build
 CMakeFiles/ROSBUILD_genmsg_cpp.dir/all: CMakeFiles/rosbuild_premsgsrvgen.dir/all
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make CMakeFiles/ROSBUILD_genmsg_cpp.dir/depend
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make CMakeFiles/ROSBUILD_genmsg_cpp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 
 	@echo "Built target ROSBUILD_genmsg_cpp"
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ROSBUILD_genmsg_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ROSBUILD_genmsg_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/rule
@@ -90,13 +90,13 @@ clean: CMakeFiles/ROSBUILD_genmsg_cpp.dir/clean
 CMakeFiles/ROSBUILD_genmsg_lisp.dir/all: CMakeFiles/rosbuild_premsgsrvgen.dir/all
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_lisp.dir/build.make CMakeFiles/ROSBUILD_genmsg_lisp.dir/depend
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_lisp.dir/build.make CMakeFiles/ROSBUILD_genmsg_lisp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  2 3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 
 	@echo "Built target ROSBUILD_genmsg_lisp"
 .PHONY : CMakeFiles/ROSBUILD_genmsg_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ROSBUILD_genmsg_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ROSBUILD_genmsg_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
 .PHONY : CMakeFiles/ROSBUILD_genmsg_lisp.dir/rule
@@ -112,37 +112,6 @@ CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/ROSBUILD_genmsg_py.dir
-
-# All Build rule for target.
-CMakeFiles/ROSBUILD_genmsg_py.dir/all: CMakeFiles/rosbuild_premsgsrvgen.dir/all
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/depend
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  4 5
-	@echo "Built target ROSBUILD_genmsg_py"
-.PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/ROSBUILD_genmsg_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ROSBUILD_genmsg_py.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
-.PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/rule
-
-# Convenience name for target.
-ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py.dir/rule
-.PHONY : ROSBUILD_genmsg_py
-
-# clean rule for target.
-CMakeFiles/ROSBUILD_genmsg_py.dir/clean:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/clean
-.PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/ROSBUILD_genmsg_py.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -332,42 +301,6 @@ clean: CMakeFiles/doxygen.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/object_tracker.dir
-
-# All Build rule for target.
-CMakeFiles/object_tracker.dir/all: dlib/CMakeFiles/dlib.dir/all
-CMakeFiles/object_tracker.dir/all: CMakeFiles/rosbuild_precompile.dir/all
-	$(MAKE) -f CMakeFiles/object_tracker.dir/build.make CMakeFiles/object_tracker.dir/depend
-	$(MAKE) -f CMakeFiles/object_tracker.dir/build.make CMakeFiles/object_tracker.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  100
-	@echo "Built target object_tracker"
-.PHONY : CMakeFiles/object_tracker.dir/all
-
-# Include target in all.
-all: CMakeFiles/object_tracker.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/object_tracker.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 47
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/object_tracker.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
-.PHONY : CMakeFiles/object_tracker.dir/rule
-
-# Convenience name for target.
-object_tracker: CMakeFiles/object_tracker.dir/rule
-.PHONY : object_tracker
-
-# clean rule for target.
-CMakeFiles/object_tracker.dir/clean:
-	$(MAKE) -f CMakeFiles/object_tracker.dir/build.make CMakeFiles/object_tracker.dir/clean
-.PHONY : CMakeFiles/object_tracker.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/object_tracker.dir/clean
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/rosbuild_clean-test-results.dir
 
 # All Build rule for target.
@@ -464,9 +397,8 @@ clean: CMakeFiles/rosbuild_premsgsrvgen.dir/clean
 # Target rules for target CMakeFiles/rospack_genmsg.dir
 
 # All Build rule for target.
-CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_cpp.dir/all
 CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_lisp.dir/all
-CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_py.dir/all
+CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_cpp.dir/all
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/depend
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 
@@ -475,7 +407,7 @@ CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_py.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/rospack_genmsg.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/rospack_genmsg.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
 .PHONY : CMakeFiles/rospack_genmsg.dir/rule
@@ -712,6 +644,42 @@ clean: CMakeFiles/test-results-run.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/test2.dir
+
+# All Build rule for target.
+CMakeFiles/test2.dir/all: CMakeFiles/rosbuild_precompile.dir/all
+CMakeFiles/test2.dir/all: dlib/CMakeFiles/dlib.dir/all
+	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/depend
+	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  100
+	@echo "Built target test2"
+.PHONY : CMakeFiles/test2.dir/all
+
+# Include target in all.
+all: CMakeFiles/test2.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 49
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
+.PHONY : CMakeFiles/test2.dir/rule
+
+# Convenience name for target.
+test2: CMakeFiles/test2.dir/rule
+.PHONY : test2
+
+# clean rule for target.
+CMakeFiles/test2.dir/clean:
+	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/clean
+.PHONY : CMakeFiles/test2.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/test2.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/tests.dir
 
 # All Build rule for target.
@@ -740,93 +708,6 @@ CMakeFiles/tests.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/tests.dir/clean
-.PHONY : clean
-
-#=============================================================================
-# Directory level rules for directory dlib
-
-# Convenience name for "all" pass in the directory.
-dlib/all: dlib/CMakeFiles/dlib.dir/all
-dlib/all: dlib/CMakeFiles/dlib_shared.dir/all
-.PHONY : dlib/all
-
-# Convenience name for "clean" pass in the directory.
-dlib/clean: dlib/CMakeFiles/dlib.dir/clean
-dlib/clean: dlib/CMakeFiles/dlib_shared.dir/clean
-.PHONY : dlib/clean
-
-# Convenience name for "preinstall" pass in the directory.
-dlib/preinstall:
-.PHONY : dlib/preinstall
-
-#=============================================================================
-# Target rules for target dlib/CMakeFiles/dlib.dir
-
-# All Build rule for target.
-dlib/CMakeFiles/dlib.dir/all:
-	$(MAKE) -f dlib/CMakeFiles/dlib.dir/build.make dlib/CMakeFiles/dlib.dir/depend
-	$(MAKE) -f dlib/CMakeFiles/dlib.dir/build.make dlib/CMakeFiles/dlib.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51
-	@echo "Built target dlib"
-.PHONY : dlib/CMakeFiles/dlib.dir/all
-
-# Include target in all.
-all: dlib/CMakeFiles/dlib.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-dlib/CMakeFiles/dlib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 46
-	$(MAKE) -f CMakeFiles/Makefile2 dlib/CMakeFiles/dlib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
-.PHONY : dlib/CMakeFiles/dlib.dir/rule
-
-# Convenience name for target.
-dlib: dlib/CMakeFiles/dlib.dir/rule
-.PHONY : dlib
-
-# clean rule for target.
-dlib/CMakeFiles/dlib.dir/clean:
-	$(MAKE) -f dlib/CMakeFiles/dlib.dir/build.make dlib/CMakeFiles/dlib.dir/clean
-.PHONY : dlib/CMakeFiles/dlib.dir/clean
-
-# clean rule for target.
-clean: dlib/CMakeFiles/dlib.dir/clean
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target dlib/CMakeFiles/dlib_shared.dir
-
-# All Build rule for target.
-dlib/CMakeFiles/dlib_shared.dir/all: dlib/CMakeFiles/dlib.dir/all
-	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/depend
-	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97
-	@echo "Built target dlib_shared"
-.PHONY : dlib/CMakeFiles/dlib_shared.dir/all
-
-# Include target in all.
-all: dlib/CMakeFiles/dlib_shared.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-dlib/CMakeFiles/dlib_shared.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 92
-	$(MAKE) -f CMakeFiles/Makefile2 dlib/CMakeFiles/dlib_shared.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
-.PHONY : dlib/CMakeFiles/dlib_shared.dir/rule
-
-# Convenience name for target.
-dlib_shared: dlib/CMakeFiles/dlib_shared.dir/rule
-.PHONY : dlib_shared
-
-# clean rule for target.
-dlib/CMakeFiles/dlib_shared.dir/clean:
-	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/clean
-.PHONY : dlib/CMakeFiles/dlib_shared.dir/clean
-
-# clean rule for target.
-clean: dlib/CMakeFiles/dlib_shared.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -905,6 +786,93 @@ gtest/CMakeFiles/gtest_main.dir/clean:
 
 # clean rule for target.
 clean: gtest/CMakeFiles/gtest_main.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory dlib
+
+# Convenience name for "all" pass in the directory.
+dlib/all: dlib/CMakeFiles/dlib.dir/all
+dlib/all: dlib/CMakeFiles/dlib_shared.dir/all
+.PHONY : dlib/all
+
+# Convenience name for "clean" pass in the directory.
+dlib/clean: dlib/CMakeFiles/dlib.dir/clean
+dlib/clean: dlib/CMakeFiles/dlib_shared.dir/clean
+.PHONY : dlib/clean
+
+# Convenience name for "preinstall" pass in the directory.
+dlib/preinstall:
+.PHONY : dlib/preinstall
+
+#=============================================================================
+# Target rules for target dlib/CMakeFiles/dlib.dir
+
+# All Build rule for target.
+dlib/CMakeFiles/dlib.dir/all:
+	$(MAKE) -f dlib/CMakeFiles/dlib.dir/build.make dlib/CMakeFiles/dlib.dir/depend
+	$(MAKE) -f dlib/CMakeFiles/dlib.dir/build.make dlib/CMakeFiles/dlib.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48
+	@echo "Built target dlib"
+.PHONY : dlib/CMakeFiles/dlib.dir/all
+
+# Include target in all.
+all: dlib/CMakeFiles/dlib.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+dlib/CMakeFiles/dlib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 48
+	$(MAKE) -f CMakeFiles/Makefile2 dlib/CMakeFiles/dlib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
+.PHONY : dlib/CMakeFiles/dlib.dir/rule
+
+# Convenience name for target.
+dlib: dlib/CMakeFiles/dlib.dir/rule
+.PHONY : dlib
+
+# clean rule for target.
+dlib/CMakeFiles/dlib.dir/clean:
+	$(MAKE) -f dlib/CMakeFiles/dlib.dir/build.make dlib/CMakeFiles/dlib.dir/clean
+.PHONY : dlib/CMakeFiles/dlib.dir/clean
+
+# clean rule for target.
+clean: dlib/CMakeFiles/dlib.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target dlib/CMakeFiles/dlib_shared.dir
+
+# All Build rule for target.
+dlib/CMakeFiles/dlib_shared.dir/all: dlib/CMakeFiles/dlib.dir/all
+	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/depend
+	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles  49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97
+	@echo "Built target dlib_shared"
+.PHONY : dlib/CMakeFiles/dlib_shared.dir/all
+
+# Include target in all.
+all: dlib/CMakeFiles/dlib_shared.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+dlib/CMakeFiles/dlib_shared.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 97
+	$(MAKE) -f CMakeFiles/Makefile2 dlib/CMakeFiles/dlib_shared.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles 0
+.PHONY : dlib/CMakeFiles/dlib_shared.dir/rule
+
+# Convenience name for target.
+dlib_shared: dlib/CMakeFiles/dlib_shared.dir/rule
+.PHONY : dlib_shared
+
+# clean rule for target.
+dlib/CMakeFiles/dlib_shared.dir/clean:
+	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/clean
+.PHONY : dlib/CMakeFiles/dlib_shared.dir/clean
+
+# clean rule for target.
+clean: dlib/CMakeFiles/dlib_shared.dir/clean
 .PHONY : clean
 
 #=============================================================================

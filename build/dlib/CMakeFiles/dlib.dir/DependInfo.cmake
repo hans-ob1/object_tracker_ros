@@ -65,12 +65,21 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
+# Preprocessor definitions for this target.
+SET(CMAKE_TARGET_DEFINITIONS
+  "ROS_PACKAGE_NAME=\"object_tracker_ros\""
+  )
+
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
   )
 
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
+  "../include"
+  "/home/hxhx/darknet/haixun00/neural_cam_ros/msg_gen/cpp/include"
+  "/opt/ros/indigo/include"
+  "/usr/include/eigen3"
   "/usr/local/cuda-8.0/include"
   "/usr"
   )

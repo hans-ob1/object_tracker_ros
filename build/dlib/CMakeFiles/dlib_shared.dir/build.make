@@ -489,7 +489,7 @@ dlib/CMakeFiles/dlib.dir/dnn/./dlib_generated_cuda_dlib.cu.o: ../dlib/dnn/cuda_d
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building NVCC (Device) object dlib/CMakeFiles/dlib.dir/dnn/./dlib_generated_cuda_dlib.cu.o"
 	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn && /usr/bin/cmake -E make_directory /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/.
-	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING=Release -D generated_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/./dlib_generated_cuda_dlib.cu.o -D generated_cubin_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/./dlib_generated_cuda_dlib.cu.o.cubin.txt -P /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/dlib_generated_cuda_dlib.cu.o.cmake
+	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING=RelWithDebInfo -D generated_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/./dlib_generated_cuda_dlib.cu.o -D generated_cubin_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/./dlib_generated_cuda_dlib.cu.o.cubin.txt -P /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib.dir/dnn/dlib_generated_cuda_dlib.cu.o.cmake
 
 dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o: ../dlib/algs.h
 dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o: ../dlib/any.h
@@ -931,7 +931,7 @@ dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o: ../d
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building NVCC (Device) object dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o"
 	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn && /usr/bin/cmake -E make_directory /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/.
-	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING=Release -D generated_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o -D generated_cubin_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o.cubin.txt -P /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/dlib_shared_generated_cuda_dlib.cu.o.cmake
+	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING=RelWithDebInfo -D generated_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o -D generated_cubin_file:STRING=/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o.cubin.txt -P /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/dlib_shared_generated_cuda_dlib.cu.o.cmake
 
 dlib/CMakeFiles/dlib_shared.dir/base64/base64_kernel_1.cpp.o: dlib/CMakeFiles/dlib_shared.dir/flags.make
 dlib/CMakeFiles/dlib_shared.dir/base64/base64_kernel_1.cpp.o: ../dlib/base64/base64_kernel_1.cpp
@@ -2332,89 +2332,89 @@ dlib_shared_OBJECTS = \
 dlib_shared_EXTERNAL_OBJECTS = \
 "/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o"
 
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/base64/base64_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bigint/bigint_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bigint/bigint_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bit_stream/bit_stream_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_decoder/entropy_decoder_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_decoder/entropy_decoder_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_encoder/entropy_encoder_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_encoder/entropy_encoder_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/md5/md5_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/tokenizer/tokenizer_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/unicode/unicode.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/data_io/image_dataset_metadata.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/data_io/mnist.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/cpu_dlib.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/tensor_tools.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockets/sockets_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bsp/bsp.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dir_nav/dir_nav_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dir_nav/dir_nav_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dir_nav/dir_nav_extensions.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/linker/linker_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/logger/extra_logger_headers.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/logger/logger_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/logger/logger_config_file.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/misc_api/misc_api_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/misc_api/misc_api_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockets/sockets_extensions.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockets/sockets_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockstreambuf/sockstreambuf.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockstreambuf/sockstreambuf_unbuffered.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/server/server_kernel.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/server/server_iostream.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/server/server_http.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/multithreaded_object_extension.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threaded_object_extension.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threads_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threads_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threads_kernel_shared.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/thread_pool_extension.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/async.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/timer/timer.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/stack_trace.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/fonts.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/widgets.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/drawable.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/canvas_drawing.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/style.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/base_widgets.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_core/gui_core_kernel_1.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_core/gui_core_kernel_2.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_loader/png_loader.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_saver/save_png.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_loader/jpeg_loader.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_saver/save_jpeg.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/cudnn_dlibapi.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/cublas_dlibapi.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/curand_dlibapi.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/gpu_data.cpp.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/build.make
-dlib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcudart.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libnsl.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libSM.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libICE.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libX11.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libXext.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libpng.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libjpeg.so
-dlib/libdlib.so.19.4.0: /usr/lib/libopenblas.so
-dlib/libdlib.so.19.4.0: /usr/lib/liblapack.so
-dlib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcublas.so
-dlib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcudnn.so
-dlib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcurand.so
-dlib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libsqlite3.so
-dlib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared library libdlib.so"
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/base64/base64_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bigint/bigint_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bigint/bigint_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bit_stream/bit_stream_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_decoder/entropy_decoder_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_decoder/entropy_decoder_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_encoder/entropy_encoder_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/entropy_encoder/entropy_encoder_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/md5/md5_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/tokenizer/tokenizer_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/unicode/unicode.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/data_io/image_dataset_metadata.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/data_io/mnist.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/cpu_dlib.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/tensor_tools.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockets/sockets_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/bsp/bsp.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dir_nav/dir_nav_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dir_nav/dir_nav_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dir_nav/dir_nav_extensions.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/linker/linker_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/logger/extra_logger_headers.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/logger/logger_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/logger/logger_config_file.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/misc_api/misc_api_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/misc_api/misc_api_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockets/sockets_extensions.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockets/sockets_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockstreambuf/sockstreambuf.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/sockstreambuf/sockstreambuf_unbuffered.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/server/server_kernel.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/server/server_iostream.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/server/server_http.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/multithreaded_object_extension.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threaded_object_extension.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threads_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threads_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/threads_kernel_shared.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/thread_pool_extension.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/threads/async.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/timer/timer.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/stack_trace.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/fonts.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/widgets.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/drawable.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/canvas_drawing.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/style.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_widgets/base_widgets.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_core/gui_core_kernel_1.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/gui_core/gui_core_kernel_2.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_loader/png_loader.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_saver/save_png.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_loader/jpeg_loader.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/image_saver/save_jpeg.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/cudnn_dlibapi.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/cublas_dlibapi.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/curand_dlibapi.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/gpu_data.cpp.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/dnn/./dlib_shared_generated_cuda_dlib.cu.o
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/build.make
+../lib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcudart.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libnsl.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libSM.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libICE.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libX11.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libXext.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libpng.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libjpeg.so
+../lib/libdlib.so.19.4.0: /usr/lib/libopenblas.so
+../lib/libdlib.so.19.4.0: /usr/lib/liblapack.so
+../lib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcublas.so
+../lib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcudnn.so
+../lib/libdlib.so.19.4.0: /usr/local/cuda-8.0/lib64/libcurand.so
+../lib/libdlib.so.19.4.0: /usr/lib/x86_64-linux-gnu/libsqlite3.so
+../lib/libdlib.so.19.4.0: dlib/CMakeFiles/dlib_shared.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared library ../../lib/libdlib.so"
 	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dlib_shared.dir/link.txt --verbose=$(VERBOSE)
-	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib && $(CMAKE_COMMAND) -E cmake_symlink_library libdlib.so.19.4.0 libdlib.so.19.4.0 libdlib.so
+	cd /home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib && $(CMAKE_COMMAND) -E cmake_symlink_library ../../lib/libdlib.so.19.4.0 ../../lib/libdlib.so.19.4.0 ../../lib/libdlib.so
 
-dlib/libdlib.so: dlib/libdlib.so.19.4.0
+../lib/libdlib.so: ../lib/libdlib.so.19.4.0
 
 # Rule to build all files generated by this target.
-dlib/CMakeFiles/dlib_shared.dir/build: dlib/libdlib.so
+dlib/CMakeFiles/dlib_shared.dir/build: ../lib/libdlib.so
 .PHONY : dlib/CMakeFiles/dlib_shared.dir/build
 
 dlib/CMakeFiles/dlib_shared.dir/requires: dlib/CMakeFiles/dlib_shared.dir/base64/base64_kernel_1.cpp.o.requires

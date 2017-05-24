@@ -33,9 +33,9 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 // syntax should this version of CMake try to support.
 CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
 
-//Choose the type of build, options are: Debug Release
-//\n      RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=Release
+//Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
+// CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
+CMAKE_BUILD_TYPE:STRING=
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -369,9 +369,6 @@ LIBRARY_OUTPUT_PATH:PATH=
 // installations)
 LIB_INSTALL_DIR:STRING=lib
 
-//compile w/o dlib
-LIGHTWEIGHT:BOOL=ON
-
 //lsb_release executable was found
 LSB_FOUND:BOOL=TRUE
 
@@ -642,7 +639,7 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
 //Path to a file.
-_file_name:FILEPATH=/home/hxhx/darknet/haixun00/object_tracker_ros/src/tracker.cpp
+_file_name:FILEPATH=/home/hxhx/darknet/haixun00/object_tracker_ros/src/test.cpp
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/indigo/share/catkin/cmake
@@ -1000,7 +997,7 @@ CUDA_parse_cubin:INTERNAL=/usr/share/cmake-2.8/Modules/FindCUDA/parse_cubin.cmak
 //Location of run_nvcc.cmake
 CUDA_run_nvcc:INTERNAL=/usr/share/cmake-2.8/Modules/FindCUDA/run_nvcc.cmake
 //Details about finding CUDA
-FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda-8.0][/usr/local/cuda-8.0/bin/nvcc][/usr/local/cuda-8.0/include][/usr/local/cuda-8.0/lib64/libcudart.so][v8.0(8.0)]
+FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda-8.0][/usr/local/cuda-8.0/bin/nvcc][/usr/local/cuda-8.0/include][/usr/local/cuda-8.0/lib64/libcudart.so][v8.0(7.5)]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding PythonInterp
@@ -1229,7 +1226,7 @@ ZLIB_LIBRARY-ADVANCED:INTERNAL=1
 __pkg_config_checked_BLAS_REFERENCE:INTERNAL=1
 __pkg_config_checked_LAPACK_REFERENCE:INTERNAL=1
 _rosbuild_EXPORTS:INTERNAL=
-_rosbuild_cached_flag_time:INTERNAL=1495596517.5
+_rosbuild_cached_flag_time:INTERNAL=1495618443.3
 _roslang_LANGS:INTERNAL=roslisp
 _rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/indigo/share/cpp_common/package.xml;/opt/ros/indigo/share/rostime/package.xml;/opt/ros/indigo/share/roscpp_traits/package.xml;/opt/ros/indigo/share/roscpp_serialization/package.xml;/opt/ros/indigo/share/catkin/package.xml;/opt/ros/indigo/share/genmsg/package.xml;/opt/ros/indigo/share/genpy/package.xml;/opt/ros/indigo/share/message_runtime/package.xml;/opt/ros/indigo/share/gencpp/package.xml;/opt/ros/indigo/share/genlisp/package.xml;/opt/ros/indigo/share/message_generation/package.xml;/opt/ros/indigo/share/rosbuild/package.xml;/opt/ros/indigo/share/rosconsole/package.xml;/opt/ros/indigo/share/std_msgs/package.xml;/opt/ros/indigo/share/rosgraph_msgs/package.xml;/opt/ros/indigo/share/xmlrpcpp/package.xml;/opt/ros/indigo/share/roscpp/package.xml;/opt/ros/indigo/share/geometry_msgs/package.xml;/opt/ros/indigo/share/rosgraph/package.xml;/opt/ros/indigo/share/rospack/package.xml;/opt/ros/indigo/share/roslib/package.xml;/opt/ros/indigo/share/rospy/package.xml;/opt/ros/indigo/share/sensor_msgs/package.xml;/opt/ros/indigo/share/stereo_msgs/package.xml;/opt/ros/indigo/share/angles/package.xml;/opt/ros/indigo/share/message_filters/package.xml;/opt/ros/indigo/share/rosclean/package.xml;/opt/ros/indigo/share/rosmaster/package.xml;/opt/ros/indigo/share/rosout/package.xml;/opt/ros/indigo/share/rosparam/package.xml;/opt/ros/indigo/share/rosunit/package.xml;/opt/ros/indigo/share/roslaunch/package.xml;/opt/ros/indigo/share/roslz4/package.xml;/opt/ros/indigo/share/rosbag_storage/package.xml;/opt/ros/indigo/share/topic_tools/package.xml;/opt/ros/indigo/share/rosbag/package.xml;/opt/ros/indigo/share/rostopic/package.xml;/opt/ros/indigo/share/rosnode/package.xml;/opt/ros/indigo/share/rosmsg/package.xml;/opt/ros/indigo/share/rosservice/package.xml;/opt/ros/indigo/share/roswtf/package.xml;/opt/ros/indigo/share/actionlib_msgs/package.xml;/opt/ros/indigo/share/tf2_msgs/package.xml;/opt/ros/indigo/share/tf2/package.xml;/opt/ros/indigo/share/rostest/package.xml;/opt/ros/indigo/share/actionlib/package.xml;/opt/ros/indigo/share/tf2_py/package.xml;/opt/ros/indigo/share/tf2_ros/package.xml;/opt/ros/indigo/share/tf/package.xml;/opt/ros/indigo/share/laser_geometry/package.xml;/home/hxhx/darknet/haixun00/neural_cam_ros/manifest.xml
 _rospack_msgsrv_gen_invoke_result:INTERNAL=/home/hxhx/darknet/haixun00/neural_cam_ros/msg_gen/generated

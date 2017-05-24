@@ -59,9 +59,9 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/dlib_shared.dir/dnn/cublas_dlibapi.cpp.o"
   "CMakeFiles/dlib_shared.dir/dnn/curand_dlibapi.cpp.o"
   "CMakeFiles/dlib_shared.dir/dnn/gpu_data.cpp.o"
-  "libdlib.pdb"
-  "libdlib.so"
-  "libdlib.so.19.4.0"
+  "../../lib/libdlib.pdb"
+  "../../lib/libdlib.so"
+  "../../lib/libdlib.so.19.4.0"
 )
 
 # Per-language clean rules from dependency scanning.

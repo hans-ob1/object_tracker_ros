@@ -1,6 +1,5 @@
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir
-/home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/ROSBUILD_genmsg_py.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/_catkin_empty_exported_target.dir
@@ -11,7 +10,6 @@
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/doxygen.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/gtest/CMakeFiles/gtest.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/gtest/CMakeFiles/gtest_main.dir
-/home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/object_tracker.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/rosbuild_clean-test-results.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/rosbuild_precompile.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/rosbuild_premsgsrvgen.dir
@@ -23,4 +21,5 @@
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test-future.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test-results.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test-results-run.dir
+/home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test2.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/tests.dir
