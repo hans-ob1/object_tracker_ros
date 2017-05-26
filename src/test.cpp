@@ -33,7 +33,7 @@ int noObjectsCount = 0;
 // datatype
 typedef struct {
     int id;
-    bool found = false;
+    int notFoundCounter = 0;
     cv::Point2f topLeft;
     cv::Point2f bottomRight;
 
@@ -77,39 +77,29 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
    int num_objects_det_curr = msg->stack_len;
    int num_objects_det_prev = (int) prev_objects.size();
 
-   if(num_objects_det_curr > 0 && setflag){			// situation 1: the very first time when num of objects in a scene is more than zero.
+   if(setFlag){   // first time
 
-   		//start initial assignment
-   		for(int i = 0; i < num_objects_det_curr; i++){
+   		if(num_objects_det_curr > 0){   //first time seen objects
 
-   			object tempStorage;
+   			//start initial assignment
+   			for(int i = 0; i < num_objects_det_curr; i++){
 
-   			tempStorage.id = i+1;	//generate ID
-   			tempStorage.found = true;
-   			tempStorage.topLeft.x = (float) msg->stack_obstacles[i].topleft.x;
-   			tempStorage.topLeft.y = (float) msg->stack_obstacles[i].topleft.y;
-   			tempStorage.bottomRight.x = (float) msg->stack_obstacles[i].bottomright.x;
-   			tempStorage.bottomRight.y = (float) msg->stack_obstacles[i].bottomright.y;
+	   			object tempStorage;
 
-   			prev_objects.push_back(tempStorage);
+	   			tempStorage.id = i+1;	//generate ID
+	   			tempStorage.notFoundCounter = 0;
+	   			tempStorage.topLeft.x = (float) msg->stack_obstacles[i].topleft.x;
+	   			tempStorage.topLeft.y = (float) msg->stack_obstacles[i].topleft.y;
+	   			tempStorage.bottomRight.x = (float) msg->stack_obstacles[i].bottomright.x;
+	   			tempStorage.bottomRight.y = (float) msg->stack_obstacles[i].bottomright.y;
+
+	   			prev_objects.push_back(tempStorage);
+   			}
+
+   			setFlag = false;
    		}
 
-   		setflag = false;
-
-   }else if (num_objects_det_curr == 0 && !setflag){		// situation 2: subsequent situation when there is no presence objects in the scene and its not the first frame
-
-   		// use previous tracking (previous IDs / kalman filter etc)
-   		noObjectsCount++;
-
-   		if(noObjectsCount > MAX_THRESH)		//track previous assignment for 5 frames if no object detected in scene
-   		   setflag = true; 						//reset
-   		else{
-
-   			//use old detection (for now is copy and use)
-   			curr_objects.swap(prev_objects);		   
-   		}
-
-   }else if (num_objects_det_curr > 0 && !setflag){			// situation 3: objects were detected in subsequent frame
+   }else{		// subsequent frame
 
    		/* -----> store objects into the curr_objects -----> */
    		object tempStorage;
@@ -125,6 +115,8 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
    		}
    		/* <----- store objects into the curr_objects <----- */
 
+
+   		bool situation = true;
    		int max_mat_dim = max(num_objects_det_curr, num_objects_det_prev);
 
    		matrix<int> cost(max_mat_dim,max_mat_dim);
@@ -138,11 +130,10 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 	   			for(int j = 0; j < num_objects_det_prev; j++){	//check which give the highest IOU
 
 	   				if(j >= num_objects_det_curr){
+	   					
 	   					// missing detections in the current frame
 
-	   					//cout << "Missing Detections Number: " << (num_objects_det_prev - num_objects_det_curr) << endl;
-
-	   					cost(i,j) = -1;				//assign dummy value
+	   					cost(i,j) = -1;							//assign dummy value
 
 	   				}else{
 
@@ -158,11 +149,13 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 	   			}
 	   		}
 
-	   	}else{					// Case 2: When detected objects in the current window is strictly more than the previous detected
+	   	}else{													// Case 2: When detected objects in the current window is strictly more than the previous detected
+
+	   		situation = false;
 
 	   		cout << "Case 2: prev <= curr" << endl;
 
-	   		for(int i = 0; i < num_objects_det_curr; i++){
+	   		for(int i = 0; i < num_objects_det_curr; i++){ 			//looking at previous objects
 
 		   		for(int j = 0; j < num_objects_det_curr; j++){
 
@@ -192,8 +185,56 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
     	// job 0, and the bottom row person to job 1.
 
 	   	std::vector<long> assignment = dlib::max_cost_assignment(cost);
-    	for (unsigned int i = 0; i < assignment.size(); i++)
-        	cout << assignment[i] << std::endl;
+    	for (unsigned int i = 0; i < assignment.size(); i++){
+
+        	cout << "Assignment: " << (int) assignment[i] << std::endl;
+
+        	int assignment_to = (int) assignment[i];
+
+        	if(situation){
+
+        		// if current detected objects less than the previous detected ones, assign the current detected ones with previous id
+        		// mark the rest as undetected for this current iteration
+
+        		if(assignment_to >= num_objects_det_curr) {		// assigned to hoax object
+
+        			// mark as undetected for this round
+
+        			// TODO:
+
+        			if(prev_objects[i].notFoundCounter < 5){ 	//assess if the previous item need to be included into the current object list or not
+
+        				//kalman assignment here:
+
+        				prev_objects[i].notFoundCounter++;
+        				curr_objects.push_back(prev_objects[i]);
+        			}
+
+        		}else{
+
+        			curr_objects[assignment_to].id = prev_objects[i].id;
+        		}
+
+        	}else{
+
+        	 	if(i >= num_objects_det_prev){
+
+        	 		//mark as new objects detected (generate new id/kalman filter)
+
+        	 		// TODO:
+
+        	 		curr_objects[assignment_to].id = 19992;
+        	 		curr_objects[assignment_to].notFoundCounter = 0;
+
+        	 		//insert new kalman filter here
+
+        	 	}else{
+
+        	 		curr_objects[assignment_to].id = prev_objects[i].id;
+        	 	}
+
+        	}
+    	}
 
 
 	   	prev_objects.swap(curr_objects);
@@ -228,7 +269,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "listener");
 
   ros::NodeHandle n;
-  ros::Subscriber sub = n.subscribe("/camera/usb_cam/obstacles", 1000, subCallback);
+  ros::Subscriber sub = n.subscribe("/camera1/usb_cam1/obstacles", 1000, subCallback);
 
   ros::spin();
 
