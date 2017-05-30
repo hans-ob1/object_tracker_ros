@@ -21,8 +21,9 @@
 
 #include <dlib/optimization/max_cost_assignment.h>
 
-#define MAX_THRESH 5
-#define IOU_THRESH 0.6 
+#define MAX_THRESH 10
+#define IOU_THRESH 0.6
+#define IOU_SCALING_FACTOR 1000 
 
 using namespace std;
 using namespace dlib;
@@ -123,32 +124,48 @@ KalmanFilter create_kalmanTracker(){
 	return kf;
 }
 
+/*
+bool check_intersection(cv::Point2f topLeft_a, cv::Point2f topLeft_b, cv::Point2f bottomRight_a, cv::Point2f bottomRight_b){
 
+	bool isIntersected = false;
+
+	Point2f referenceTopLeft = topLeft_a;
+	Point2f referenceBottomRight = bottomRight_a;
+
+	Point2f target[] = {topLeft_b, Point2f(bottomRight_b.x,topLeft_a.y), bottomRight_b, Point2f(topLeft_a.x, bottomRight_b.y)};
+
+	for(int i = 0; i < 4; i++){
+		if(target[i].x > referenceTopLeft.x && target[i].x < referenceBottomRight.x && target[i].y > referenceTopLeft.y && target[i].y < referenceBottomRight.y){
+			isIntersected = true;
+			break;
+		}
+	}
+
+	return isIntersected;
+}
+*/
+
+// hieuristic function 
 float calculate_iou(cv::Point2f tl_a, cv::Point2f tl_b, cv::Point2f br_a, cv::Point2f br_b){
 
-	float xA = max(tl_a.x,tl_b.x);
-	float yA = max(tl_a.y,tl_b.y);
-	float xB = min(br_a.x,br_b.x);
-	float yB = min(br_a.y,br_b.y);
+	//check if the two box intersects
+	//Only works if two rectangle intersects
+	float iou;
 
-	float inter_area = (xB - xA + 1)*(yB - yA + 1);
+		float xA = max(tl_a.x,tl_b.x);
+		float yA = max(tl_a.y,tl_b.y);
+		float xB = min(br_a.x,br_b.x);
+		float yB = min(br_a.y,br_b.y);
 
-	float boxAArea = (br_a.x - tl_a.x + 1)*(br_a.y - tl_a.y + 1);
-	float boxBArea = (br_b.x - tl_b.x + 1)*(br_b.y - tl_b.y + 1);
+		float inter_area = (xB - xA + 1)*(yB - yA + 1);
 
-	float iou = inter_area / (boxBArea + boxAArea - inter_area);
+		float boxAArea = (br_a.x - tl_a.x + 1)*(br_a.y - tl_a.y + 1);
+		float boxBArea = (br_b.x - tl_b.x + 1)*(br_b.y - tl_b.y + 1);
 
-/*
-	cout << "Object of INTEREST"<< endl;
-	cout << "1. Intersectional Area:  " << inter_area << endl;
-	cout << "2. Box A area: 		  " << boxAArea << endl;
-	cout << "3. Box B area: 		  " << boxBArea << endl;
-	cout << "4. Union Area: 		  " << (boxBArea + boxAArea - inter_area) << endl;
-	cout << "5. IOU: 				  " << iou << endl;
-*/
+		iou = inter_area / (boxBArea + boxAArea - inter_area);
+
 	return iou;
 }
-
 
 void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 { 
@@ -179,8 +196,16 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 	   			cv::Mat state_set(stateSize, 1, type);  // [x,y,v_x,v_y,w,h]
 				cv::Mat meas_set(measSize, 1, type);    // [z_x,z_y,z_w,z_h]
 
+				// initialization
 				tempStorage.objectState = state_set;
 				tempStorage.objectMeas = meas_set;
+
+				tempStorage.objectState.at<float>(0) = tempStorage.topLeft.x + (tempStorage.bottomRight.x - tempStorage.topLeft.x)/2;
+				tempStorage.objectState.at<float>(1) = tempStorage.topLeft.y + (tempStorage.bottomRight.y - tempStorage.topLeft.y)/2;
+				tempStorage.objectState.at<float>(2) = 0;
+				tempStorage.objectState.at<float>(3) = 0;
+				tempStorage.objectState.at<float>(4) = tempStorage.bottomRight.x - tempStorage.topLeft.x;;
+				tempStorage.objectState.at<float>(5) = tempStorage.bottomRight.y - tempStorage.topLeft.y;
 
 				tempStorage.kalmanTracker = create_kalmanTracker();
 
@@ -203,6 +228,19 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
    			tempStorage.bottomRight.x = (float) msg->stack_obstacles[i].bottomright.x;
    			tempStorage.bottomRight.y = (float) msg->stack_obstacles[i].bottomright.y;
 
+   			cv::Mat state_set(stateSize, 1, type);  // [x,y,v_x,v_y,w,h]
+			cv::Mat meas_set(measSize, 1, type);    // [z_x,z_y,z_w,z_h]
+
+			tempStorage.objectState = state_set;
+			tempStorage.objectMeas = meas_set;
+
+			tempStorage.objectState.at<float>(0) = tempStorage.topLeft.x + (tempStorage.bottomRight.x - tempStorage.topLeft.x)/2;
+			tempStorage.objectState.at<float>(1) = tempStorage.topLeft.y + (tempStorage.bottomRight.y - tempStorage.topLeft.y)/2;
+			tempStorage.objectState.at<float>(2) = 0;
+			tempStorage.objectState.at<float>(3) = 0;
+			tempStorage.objectState.at<float>(4) = tempStorage.bottomRight.x - tempStorage.topLeft.x;;
+			tempStorage.objectState.at<float>(5) = tempStorage.bottomRight.y - tempStorage.topLeft.y;
+
    			curr_objects.push_back(tempStorage);
    		}
    		/* <----- store objects into the curr_objects <----- */
@@ -214,7 +252,7 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
    		if(num_objects_det_curr <= num_objects_det_prev){       	// Case 1: When detected objects in the current window less or equal to the previous detected
 
-   			cout << "Case 1: curr <= prev" << endl;
+   			//cout << "Case 1: curr <= prev" << endl;
 
 	   		for(int i = 0; i < num_objects_det_prev; i++){
 
@@ -224,7 +262,7 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
 	   					// missing detections in the current frame
 
-	   					cost(i,j) = -1;								//assign dummy value
+	   					cost(i,j) = -1*IOU_SCALING_FACTOR;								//assign dummy value
 
 	   				}else{
 
@@ -232,10 +270,9 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
 	   					float iou_value = calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
 
-	   					cost(i,j) = (int) (iou_value*1000);
+	   					cost(i,j) = (int) (iou_value*IOU_SCALING_FACTOR);
 
-	   					
-
+	   			
 	   				}
 	   			}
 	   		}
@@ -244,7 +281,7 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
 	   		situation = false;
 
-	   		cout << "Case 2: prev <= curr" << endl;
+	   		//cout << "Case 2: prev <= curr" << endl;
 
 	   		for(int i = 0; i < num_objects_det_curr; i++){ 			//looking at previous objects
 
@@ -252,132 +289,142 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
 	   				if(i >= num_objects_det_prev){
 
-	   					cost(i,j) = -1;				//assign dummy value
+	   					cost(i,j) = -1*IOU_SCALING_FACTOR;				//assign dummy value
 
 	   				}else{
 
 		   				float iou_value = calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
 
-		   				cost(i,j) = (int) (iou_value*1000);
+		   				cost(i,j) = (int) (iou_value*IOU_SCALING_FACTOR);
 
 		   			}
 	   			}
 	   		}
 	   	}
 
-	   //	cout << "cost: " << endl;
-	   //	cout << cost << endl;
+	   	cout << "cost: " << endl;
+	   	cout << cost << endl;
 
-	   	// // example: max_cost_assignment_ex.cpp
-	   	// // This prints optimal assignments:  [2, 0, 1] which indicates that we should assign
-    	// // the person from the first row of the cost matrix to job 2, the middle row person to
-    	// // job 0, and the bottom row person to job 1.	
-	   	// std::vector<long> assignment = dlib::max_cost_assignment(cost);			//do Hungarian assignment
+	   	// example: max_cost_assignment_ex.cpp
+	   	// This prints optimal assignments:  [2, 0, 1] which indicates that we should assign
+    	// the person from the first row of the cost matrix to job 2, the middle row person to
+    	// job 0, and the bottom row person to job 1.	
+	   	std::vector<long> assignment = dlib::max_cost_assignment(cost);			//do Hungarian assignment
 
-    	// for (unsigned int i = 0; i < assignment.size(); i++){
+    	for (unsigned int i = 0; i < assignment.size(); i++){
 
-     //    	cout << "Assignment: " << (int) assignment[i] << std::endl;
+        	cout << "Assignment: " << (int) assignment[i] << std::endl;
 
-     //    	int assignment_to = (int) assignment[i];
+        	int assignment_to = (int) assignment[i];
 
-     //    	if(situation){
+        	if(situation){
 
-     //    		// if current detected objects less than the previous detected ones, assign the current detected ones with previous id
-     //    		// mark the rest as undetected for this current iteration
+        		// if current detected objects less than the previous detected ones, assign the current detected ones with previous id
+        		// mark the rest as undetected for this current iteration
 
-     //    		if(assignment_to >= num_objects_det_curr) {		// assigned to hoax object
+        		if(assignment_to >= num_objects_det_curr) {		// assigned to hoax object
 
-     //    			// mark as UNDETECTED OBJECTS for this round
+        			// mark as UNDETECTED OBJECTS for this round
 
-     //    			if(prev_objects[i].notFoundCounter < 5){ 	//assess if the previous item need to be included into the current object list or not
+        			if(prev_objects[i].notFoundCounter < MAX_THRESH){ 	//assess if the previous item need to be included into the current object list or not
 
-     //    				// kalman estimate here:
+        				// kalman estimate here:
 
-     //    				prev_objects[i].kalmanTracker.statePost = prev_objects[i].objectState;	//estimate
+        				prev_objects[i].kalmanTracker.statePost = prev_objects[i].objectState;	//estimate
 
-     //    				prev_objects[i].notFoundCounter++;
-     //    				curr_objects.push_back(prev_objects[i]);
-     //    			}
+        				prev_objects[i].notFoundCounter++;
+        				curr_objects.push_back(prev_objects[i]);
+        			}
 
-     //    		}else{		
+        		}else{		
 
-     //    			//take current measurement
-     //    			curr_objects[assignment_to].objectMeas.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;;
-					// curr_objects[assignment_to].objectMeas.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
-					// curr_objects[assignment_to].objectMeas.at<float>(2) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
-					// curr_objects[assignment_to].objectMeas.at<float>(3) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
-
-					// curr_objects[assignment_to].kalmanTracker = prev_objects[i].kalmanTracker;
-					// curr_objects[assignment_to].kalmanTracker.correct(curr_objects[assignment_to].objectMeas);		//correction
-     //    			curr_objects[assignment_to].id = prev_objects[i].id;
-     //    		}
-
-     //    	}else{
-
-     //    	 	if(i >= num_objects_det_prev){
-
-     //    	 		// mark as NEW OBJECTS detected (generate new id/kalman filter)
-
-     //    	 		curr_objects[assignment_to].id = generateRandomID();
-     //    	 		curr_objects[assignment_to].notFoundCounter = 0;
-
-     //    	 		// skip measurement assignment as we did it before 
-
-	   	// 			cv::Mat state_set(stateSize, 1, type);  // [x,y,v_x,v_y,w,h]
-					// cv::Mat meas_set(measSize, 1, type);    // [z_x,z_y,z_w,z_h]
-
-					// curr_objects[assignment_to].objectState = state_set;
-					// curr_objects[assignment_to].objectMeas = meas_set;
-
-					// // insert new kalman filter here
-					// curr_objects[assignment_to].kalmanTracker = create_kalmanTracker();
-
-     //    	 	}else{	//found and update assignment
-
-     //    			curr_objects[assignment_to].objectMeas.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;;
-					// curr_objects[assignment_to].objectMeas.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
-					// curr_objects[assignment_to].objectMeas.at<float>(2) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
-					// curr_objects[assignment_to].objectMeas.at<float>(3) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
-
-					// curr_objects[assignment_to].kalmanTracker = prev_objects[i].kalmanTracker;
-					// curr_objects[assignment_to].kalmanTracker.correct(curr_objects[assignment_to].objectMeas);		//correction
-     //    			curr_objects[assignment_to].id = prev_objects[i].id;
-     //    	 	}
-
-     //    	}
-    	// }
+        			//take current measurement
+        			curr_objects[assignment_to].objectMeas.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;
+					curr_objects[assignment_to].objectMeas.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
+					curr_objects[assignment_to].objectMeas.at<float>(2) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
+					curr_objects[assignment_to].objectMeas.at<float>(3) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
 
 
-    	// /******************************
-    	// 			Display 
-    	// ******************************/
-    	// cv::Mat display_img(640, 430, CV_8UC3, Scalar(0,0,0));	//dummy display
+					curr_objects[assignment_to].kalmanTracker = prev_objects[i].kalmanTracker;
+					curr_objects[assignment_to].kalmanTracker.correct(curr_objects[assignment_to].objectMeas);		//correction
+        			curr_objects[assignment_to].id = prev_objects[i].id;
+        		}
 
-    	// for(int k = 0; k < curr_objects.size(); k++){
-    	// 	// >>>> Matrix A
-     //  		curr_objects[k].kalmanTracker.transitionMatrix.at<float>(2) = dT;
-     //  		curr_objects[k].kalmanTracker.transitionMatrix.at<float>(9) = dT;
-     //  		// <<<< Matrix A
+        	}else{
 
-     //  		curr_objects[k].objectState = curr_objects[k].kalmanTracker.predict();
+        	 	if(i >= num_objects_det_prev){
 
-     //  		cv::Rect predRect;
-     //  		predRect.width = curr_objects[k].objectState.at<float>(4);
-     //  		predRect.height = curr_objects[k].objectState.at<float>(5);
-     //  		predRect.x = curr_objects[k].objectState.at<float>(0) - predRect.width / 2;
-     //  		predRect.y = curr_objects[k].objectState.at<float>(1) - predRect.height / 2;
+        	 		// mark as NEW OBJECTS detected (generate new id/kalman filter)
 
-     //  		// label the box
-     //   		cv::Point2f namePos(predRect.tl().x,predRect.tl().y-10);
-     //   		cv::putText(display_img, "testing id", namePos, FONT_HERSHEY_PLAIN, 2.0, CV_RGB(0,128,0), 1.5);
+        	 		curr_objects[assignment_to].id = generateRandomID();
+        	 		curr_objects[assignment_to].notFoundCounter = 0;
 
-     //  		cv::rectangle(display_img, predRect, CV_RGB(0,128,0), 2);
-    	// }
+        	 		// skip measurement assignment as we did it before 
 
-    	// cv::imshow("testing", display_img);
-    	// cv::waitKey(5);
+	   				cv::Mat state_set(stateSize, 1, type);  // [x,y,v_x,v_y,w,h]
+					cv::Mat meas_set(measSize, 1, type);    // [z_x,z_y,z_w,z_h]
 
-    	// // store the current objects and clear
+					curr_objects[assignment_to].objectState = state_set;
+					curr_objects[assignment_to].objectMeas = meas_set;
+
+        			curr_objects[assignment_to].objectMeas.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;
+					curr_objects[assignment_to].objectMeas.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
+					curr_objects[assignment_to].objectMeas.at<float>(2) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
+					curr_objects[assignment_to].objectMeas.at<float>(3) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
+
+					// insert new kalman filter here
+					curr_objects[assignment_to].kalmanTracker = create_kalmanTracker();
+
+        	 	}else{	//found and update assignment
+
+        			curr_objects[assignment_to].objectMeas.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;
+					curr_objects[assignment_to].objectMeas.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
+					curr_objects[assignment_to].objectMeas.at<float>(2) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
+					curr_objects[assignment_to].objectMeas.at<float>(3) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
+
+					curr_objects[assignment_to].kalmanTracker = prev_objects[i].kalmanTracker;
+					curr_objects[assignment_to].kalmanTracker.correct(curr_objects[assignment_to].objectMeas);		//correction
+        			curr_objects[assignment_to].id = prev_objects[i].id;
+        	 	}
+
+        	}
+    	}
+
+
+    	/******************************
+    				Display 
+    	******************************/
+    	cv::Mat display_img(640, 480, CV_8UC3, Scalar(0,0,0));	//dummy display
+
+    	for(int k = 0; k < curr_objects.size(); k++){
+    		// >>>> Matrix A
+      		curr_objects[k].kalmanTracker.transitionMatrix.at<float>(2) = dT;
+      		curr_objects[k].kalmanTracker.transitionMatrix.at<float>(9) = dT;
+      		// <<<< Matrix A
+
+      		curr_objects[k].objectState = curr_objects[k].kalmanTracker.predict();
+
+      		cv::Rect predRect;
+      		predRect.width = curr_objects[k].objectState.at<float>(4);
+      		predRect.height = curr_objects[k].objectState.at<float>(5);
+      		predRect.x = curr_objects[k].objectState.at<float>(0) - predRect.width / 2;
+      		predRect.y = curr_objects[k].objectState.at<float>(1) - predRect.height / 2;
+
+      		// label the box
+      		stringstream ss;
+			ss << curr_objects[k].id;
+			string curr_object_id = ss.str();
+
+       		cv::Point2f namePos(predRect.tl().x,predRect.tl().y-10);
+       		cv::putText(display_img, curr_object_id, namePos, FONT_HERSHEY_PLAIN, 2.0, CV_RGB(0,128,0), 1.5);
+
+      		cv::rectangle(display_img, predRect, CV_RGB(0,128,0), 2);
+    	}
+
+    	cv::imshow("testing", display_img);
+    	cv::waitKey(5);
+
+    	// store the current objects and clear
 	   	 prev_objects.swap(curr_objects);
 	   	 curr_objects.clear();
 
