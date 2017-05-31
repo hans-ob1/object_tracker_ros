@@ -387,19 +387,6 @@ test-results-run/fast:
 .PHONY : test-results-run/fast
 
 #=============================================================================
-# Target rules for targets named test2
-
-# Build rule for target.
-test2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test2
-.PHONY : test2
-
-# fast build rule for target.
-test2/fast:
-	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/build
-.PHONY : test2/fast
-
-#=============================================================================
 # Target rules for targets named tests
 
 # Build rule for target.
@@ -411,6 +398,19 @@ tests: cmake_check_build_system
 tests/fast:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
 .PHONY : tests/fast
+
+#=============================================================================
+# Target rules for targets named tracker
+
+# Build rule for target.
+tracker: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tracker
+.PHONY : tracker
+
+# fast build rule for target.
+tracker/fast:
+	$(MAKE) -f CMakeFiles/tracker.dir/build.make CMakeFiles/tracker.dir/build
+.PHONY : tracker/fast
 
 #=============================================================================
 # Target rules for targets named gtest
@@ -464,29 +464,29 @@ dlib_shared/fast:
 	$(MAKE) -f dlib/CMakeFiles/dlib_shared.dir/build.make dlib/CMakeFiles/dlib_shared.dir/build
 .PHONY : dlib_shared/fast
 
-src/test.o: src/test.cpp.o
-.PHONY : src/test.o
+src/tracker.o: src/tracker.cpp.o
+.PHONY : src/tracker.o
 
 # target to build an object file
-src/test.cpp.o:
-	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/src/test.cpp.o
-.PHONY : src/test.cpp.o
+src/tracker.cpp.o:
+	$(MAKE) -f CMakeFiles/tracker.dir/build.make CMakeFiles/tracker.dir/src/tracker.cpp.o
+.PHONY : src/tracker.cpp.o
 
-src/test.i: src/test.cpp.i
-.PHONY : src/test.i
+src/tracker.i: src/tracker.cpp.i
+.PHONY : src/tracker.i
 
 # target to preprocess a source file
-src/test.cpp.i:
-	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/src/test.cpp.i
-.PHONY : src/test.cpp.i
+src/tracker.cpp.i:
+	$(MAKE) -f CMakeFiles/tracker.dir/build.make CMakeFiles/tracker.dir/src/tracker.cpp.i
+.PHONY : src/tracker.cpp.i
 
-src/test.s: src/test.cpp.s
-.PHONY : src/test.s
+src/tracker.s: src/tracker.cpp.s
+.PHONY : src/tracker.s
 
 # target to generate assembly for a file
-src/test.cpp.s:
-	$(MAKE) -f CMakeFiles/test2.dir/build.make CMakeFiles/test2.dir/src/test.cpp.s
-.PHONY : src/test.cpp.s
+src/tracker.cpp.s:
+	$(MAKE) -f CMakeFiles/tracker.dir/build.make CMakeFiles/tracker.dir/src/tracker.cpp.s
+.PHONY : src/tracker.cpp.s
 
 # Help Target
 help:
@@ -519,15 +519,15 @@ help:
 	@echo "... test-future"
 	@echo "... test-results"
 	@echo "... test-results-run"
-	@echo "... test2"
 	@echo "... tests"
+	@echo "... tracker"
 	@echo "... gtest"
 	@echo "... gtest_main"
 	@echo "... dlib"
 	@echo "... dlib_shared"
-	@echo "... src/test.o"
-	@echo "... src/test.i"
-	@echo "... src/test.s"
+	@echo "... src/tracker.o"
+	@echo "... src/tracker.i"
+	@echo "... src/tracker.s"
 .PHONY : help
 
 

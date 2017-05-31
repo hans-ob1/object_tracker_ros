@@ -15,9 +15,9 @@ add_subdirectory(dlib)
 
 
 #compile testing
-rosbuild_add_executable(test2 src/test.cpp)
-rosbuild_add_compile_flags(test2 -std=c++11)
-TARGET_LINK_LIBRARIES(test2 ${OpenCV_LIBS} dlib::dlib)
+rosbuild_add_executable(tracker src/tracker.cpp)
+rosbuild_add_compile_flags(tracker -std=c++11)
+TARGET_LINK_LIBRARIES(tracker ${OpenCV_LIBS} dlib::dlib)
 
 
 

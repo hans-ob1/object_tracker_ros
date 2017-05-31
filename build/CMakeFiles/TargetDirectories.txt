@@ -21,5 +21,5 @@
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test-future.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test-results.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test-results-run.dir
-/home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/test2.dir
 /home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/tests.dir
+/home/hxhx/darknet/haixun00/object_tracker_ros/build/CMakeFiles/tracker.dir
