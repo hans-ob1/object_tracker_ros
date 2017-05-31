@@ -110,7 +110,7 @@ KalmanFilter create_kalmanTracker(){
 	// [ 0  0  0    0 1    Ew ]
 	// [ 0  0  0    0 0    Eh ]
 
-	//cv::setIdentity(kf.processNoiseCov, cv::Scalar(1e-2));
+	cv::setIdentity(kf.processNoiseCov, cv::Scalar(1e-2));
 	kf.processNoiseCov.at<float>(0) = 1e-2;
 	kf.processNoiseCov.at<float>(7) = 1e-2;
 	kf.processNoiseCov.at<float>(14) = 2.0f;
@@ -123,27 +123,6 @@ KalmanFilter create_kalmanTracker(){
 
 	return kf;
 }
-
-/*
-bool check_intersection(cv::Point2f topLeft_a, cv::Point2f topLeft_b, cv::Point2f bottomRight_a, cv::Point2f bottomRight_b){
-
-	bool isIntersected = false;
-
-	Point2f referenceTopLeft = topLeft_a;
-	Point2f referenceBottomRight = bottomRight_a;
-
-	Point2f target[] = {topLeft_b, Point2f(bottomRight_b.x,topLeft_a.y), bottomRight_b, Point2f(topLeft_a.x, bottomRight_b.y)};
-
-	for(int i = 0; i < 4; i++){
-		if(target[i].x > referenceTopLeft.x && target[i].x < referenceBottomRight.x && target[i].y > referenceTopLeft.y && target[i].y < referenceBottomRight.y){
-			isIntersected = true;
-			break;
-		}
-	}
-
-	return isIntersected;
-}
-*/
 
 // hieuristic function 
 float calculate_iou(cv::Point2f tl_a, cv::Point2f tl_b, cv::Point2f br_a, cv::Point2f br_b){
@@ -167,9 +146,15 @@ float calculate_iou(cv::Point2f tl_a, cv::Point2f tl_b, cv::Point2f br_a, cv::Po
 	return iou;
 }
 
-void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
-{ 
-   // time keeping
+
+
+/***********************************************
+		Spontaneous Callback Function
+************************************************/
+
+void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg){
+
+   // time keeping per cycle
    double precTick = ticks;
    ticks = (double) cv::getTickCount();
    double dT = (ticks - precTick) / cv::getTickFrequency();  //seconds
@@ -177,10 +162,10 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
    int num_objects_det_curr = msg->stack_len;
    int num_objects_det_prev = (int) prev_objects.size();
 
-   if(setFlag){   // first time
+   if(setFlag){   // flag toggle for first time seen objects
 
-   		if(num_objects_det_curr > 0){   //first time seen objects
-
+   		if(num_objects_det_curr > 0){   // objects detected for the first time!
+   			
    			//start initial assignment
    			for(int i = 0; i < num_objects_det_curr; i++){
 
@@ -200,10 +185,15 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 				tempStorage.objectState = state_set;
 				tempStorage.objectMeas = meas_set;
 
+				tempStorage.objectMeas.at<float>(0) = tempStorage.topLeft.x + (tempStorage.bottomRight.x - tempStorage.topLeft.x)/2;
+				tempStorage.objectMeas.at<float>(1) = tempStorage.topLeft.y + (tempStorage.bottomRight.y - tempStorage.topLeft.y)/2;
+				tempStorage.objectMeas.at<float>(2) = tempStorage.bottomRight.x - tempStorage.topLeft.x;;
+				tempStorage.objectMeas.at<float>(3) = tempStorage.bottomRight.y - tempStorage.topLeft.y;
+
 				tempStorage.objectState.at<float>(0) = tempStorage.topLeft.x + (tempStorage.bottomRight.x - tempStorage.topLeft.x)/2;
 				tempStorage.objectState.at<float>(1) = tempStorage.topLeft.y + (tempStorage.bottomRight.y - tempStorage.topLeft.y)/2;
 				tempStorage.objectState.at<float>(2) = 0;
-				tempStorage.objectState.at<float>(3) = 0;
+				tempStorage.objectState.at<float>(3) = 0;				
 				tempStorage.objectState.at<float>(4) = tempStorage.bottomRight.x - tempStorage.topLeft.x;;
 				tempStorage.objectState.at<float>(5) = tempStorage.bottomRight.y - tempStorage.topLeft.y;
 
@@ -234,12 +224,10 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 			tempStorage.objectState = state_set;
 			tempStorage.objectMeas = meas_set;
 
-			tempStorage.objectState.at<float>(0) = tempStorage.topLeft.x + (tempStorage.bottomRight.x - tempStorage.topLeft.x)/2;
-			tempStorage.objectState.at<float>(1) = tempStorage.topLeft.y + (tempStorage.bottomRight.y - tempStorage.topLeft.y)/2;
-			tempStorage.objectState.at<float>(2) = 0;
-			tempStorage.objectState.at<float>(3) = 0;
-			tempStorage.objectState.at<float>(4) = tempStorage.bottomRight.x - tempStorage.topLeft.x;;
-			tempStorage.objectState.at<float>(5) = tempStorage.bottomRight.y - tempStorage.topLeft.y;
+			tempStorage.objectMeas.at<float>(0) = tempStorage.topLeft.x + (tempStorage.bottomRight.x - tempStorage.topLeft.x)/2;
+			tempStorage.objectMeas.at<float>(1) = tempStorage.topLeft.y + (tempStorage.bottomRight.y - tempStorage.topLeft.y)/2;
+			tempStorage.objectMeas.at<float>(2) = tempStorage.bottomRight.x - tempStorage.topLeft.x;;
+			tempStorage.objectMeas.at<float>(3) = tempStorage.bottomRight.y - tempStorage.topLeft.y;
 
    			curr_objects.push_back(tempStorage);
    		}
@@ -302,13 +290,8 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 	   		}
 	   	}
 
-	   	cout << "cost: " << endl;
-	   	cout << cost << endl;
 
-	   	// example: max_cost_assignment_ex.cpp
-	   	// This prints optimal assignments:  [2, 0, 1] which indicates that we should assign
-    	// the person from the first row of the cost matrix to job 2, the middle row person to
-    	// job 0, and the bottom row person to job 1.	
+	   	// Reference: max_cost_assignment_ex.cpp
 	   	std::vector<long> assignment = dlib::max_cost_assignment(cost);			//do Hungarian assignment
 
     	for (unsigned int i = 0; i < assignment.size(); i++){
@@ -367,10 +350,19 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 					curr_objects[assignment_to].objectState = state_set;
 					curr_objects[assignment_to].objectMeas = meas_set;
 
+					// measurement intialization
         			curr_objects[assignment_to].objectMeas.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;
 					curr_objects[assignment_to].objectMeas.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
 					curr_objects[assignment_to].objectMeas.at<float>(2) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
 					curr_objects[assignment_to].objectMeas.at<float>(3) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
+
+					// state intialization
+        			curr_objects[assignment_to].objectState.at<float>(0) = curr_objects[assignment_to].topLeft.x + (curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x)/2;
+					curr_objects[assignment_to].objectState.at<float>(1) = curr_objects[assignment_to].topLeft.y + (curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y)/2;
+					curr_objects[assignment_to].objectState.at<float>(2) = 0;
+					curr_objects[assignment_to].objectState.at<float>(3) = 0;
+					curr_objects[assignment_to].objectState.at<float>(4) = curr_objects[assignment_to].bottomRight.x - curr_objects[assignment_to].topLeft.x;
+					curr_objects[assignment_to].objectState.at<float>(5) = curr_objects[assignment_to].bottomRight.y - curr_objects[assignment_to].topLeft.y;
 
 					// insert new kalman filter here
 					curr_objects[assignment_to].kalmanTracker = create_kalmanTracker();
@@ -392,9 +384,9 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
 
     	/******************************
-    				Display 
+    			Display On Screen
     	******************************/
-    	cv::Mat display_img(640, 480, CV_8UC3, Scalar(0,0,0));	//dummy display
+    	cv::Mat display_img(cv::Size(640, 480), CV_8UC3, Scalar(0,0,0));	//dummy display
 
     	for(int k = 0; k < curr_objects.size(); k++){
     		// >>>> Matrix A
@@ -430,26 +422,6 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg)
 
    }
 }
-
-/*
-void testCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg){
-
-	ROS_INFO("Hearing From: [%s]", msg->stack_name.c_str());
-	ROS_INFO("Hearing From: [%d]", msg->stack_len);
-
-	cv::Point tl;
-	cv::Point br;
-
-	for(int i = 0; i < msg->stack_len; i++){
-		tl.x = (int) msg->stack_obstacles[i].topleft.x;
-		br.x = (int) msg->stack_obstacles[i].bottomright.x;
-		tl.y = (int) msg->stack_obstacles[i].topleft.y;
-		br.y = (int) msg->stack_obstacles[i].bottomright.y;
-	}
-	
-}
-*/
-
 
 int main(int argc, char **argv)
 {
