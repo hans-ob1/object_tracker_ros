@@ -19,14 +19,16 @@
 #include <tf/transform_listener.h>
 #include <laser_geometry/laser_geometry.h>
 
-#include <dlib/optimization/max_cost_assignment.h>
+//#include <dlib/optimization/max_cost_assignment.h>
+
+#include "Hungarian.h"
 
 #define MAX_THRESH 10
-#define IOU_THRESH 0.6
+#define IOU_MAX 99999
 #define IOU_SCALING_FACTOR 1000 
 
 using namespace std;
-using namespace dlib;
+//using namespace dlib;
 using namespace cv;
 
 // <--------- kalman filter parameters --------->
@@ -44,6 +46,9 @@ std::uniform_int_distribution<> dist(100, 999); 	// define the range
 // callback controller
 bool setFlag = true;
 int noObjectsCount = 0;
+
+// Hungarian algo
+HungarianAlgorithm HungAlgo;
 
 // datatype struct
 typedef struct {
@@ -247,7 +252,8 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg){
    		bool situation = true;
    		int max_mat_dim = max(num_objects_det_curr, num_objects_det_prev);
 
-   		matrix<int> cost(max_mat_dim,max_mat_dim);
+   		//matrix<int> cost(max_mat_dim,max_mat_dim);
+   		vector< vector<double> > costMatrix;
 
    		if(num_objects_det_curr <= num_objects_det_prev){       	// Case 1: When detected objects in the current window less or equal to the previous detected
 
@@ -255,22 +261,33 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg){
 
 	   		for(int i = 0; i < num_objects_det_prev; i++){
 
+	   			vector<double> rowStorage;
+
 	   			for(int j = 0; j < num_objects_det_prev; j++){		//check which give the highest IOU
 
 	   				if(j >= num_objects_det_curr){
 
 	   					// missing detections in the current frame
-	   					cost(i,j) = -1*IOU_SCALING_FACTOR;								//assign dummy value
+	   					//cost(i,j) = -1*IOU_SCALING_FACTOR;								//assign dummy value
+
+	   					rowStorage.push_back(IOU_MAX);
 
 	   				}else{
 
 	   					// calculate the IOU for each assignment 
-	   					float iou_value = calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
+	   					//loat iou_value = calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
 
-	   					cost(i,j) = (int) (iou_value*IOU_SCALING_FACTOR);
+	   					//cost(i,j) = (int) (iou_value*IOU_SCALING_FACTOR);
+
+	   					double iou_value = (double) IOU_SCALING_FACTOR/calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
+
+	   					rowStorage.push_back(iou_value);
 
 	   				}
 	   			}
+
+	   			costMatrix.push_back(rowStorage);
+
 	   		}
 
 	   	}else{													// Case 2: When detected objects in the current window is strictly more than the previous detected
@@ -281,32 +298,50 @@ void subCallback(const neural_cam_ros::obstacleStack::ConstPtr& msg){
 
 	   		for(int i = 0; i < num_objects_det_curr; i++){ 			//looking at previous objects
 
-		   		for(int j = 0; j < num_objects_det_curr; j++){
+	   			vector<double> rowStorage;
+
+		   		for(int j = 0; j < num_objects_det_curr; j++){   			
 
 	   				if(i >= num_objects_det_prev){
 
-	   					cost(i,j) = -1*IOU_SCALING_FACTOR;				//assign dummy value
+	   					// cost(i,j) = -1*IOU_SCALING_FACTOR;				//assign dummy value
+
+	   					rowStorage.push_back(IOU_MAX);
 
 	   				}else{
 
-		   				float iou_value = calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
+		   				// float iou_value = calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
 
-		   				cost(i,j) = (int) (iou_value*IOU_SCALING_FACTOR);
+		   				// cost(i,j) = (int) (iou_value*IOU_SCALING_FACTOR);
+
+		   				double iou_value = (double) IOU_SCALING_FACTOR/calculate_iou(prev_objects[i].topLeft, curr_objects[j].topLeft, prev_objects[i].bottomRight, curr_objects[j].bottomRight);
+
+		   				rowStorage.push_back(iou_value);
 
 		   			}
 	   			}
+
+	   			costMatrix.push_back(rowStorage);
 	   		}
 	   	}
 
 
 	   	// Reference: max_cost_assignment_ex.cpp
-	   	std::vector<long> assignment = dlib::max_cost_assignment(cost);			//do Hungarian assignment
+	   	// std::vector<long> assignment = dlib::max_cost_assignment(cost);			//do Hungarian assignment
+
+	   	
+		vector<int> assignment;
+		double cost = HungAlgo.Solve(costMatrix, assignment);
 
     	for (unsigned int i = 0; i < assignment.size(); i++){
 
-        	cout << "Assignment: " << (int) assignment[i] << std::endl;
+        	// cout << "Assignment: " << (int) assignment[i] << std::endl;
 
-        	int assignment_to = (int) assignment[i];
+        	// int assignment_to = (int) assignment[i];
+
+        	cout << "Assignment: " << assignment[i] << std::endl;
+
+        	int assignment_to = assignment[i];
 
         	if(situation){
 
