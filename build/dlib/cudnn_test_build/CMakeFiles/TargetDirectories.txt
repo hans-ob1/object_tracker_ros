@@ -1,1 +1,0 @@
-/home/hxhx/darknet/haixun00/object_tracker_ros/build/dlib/cudnn_test_build/CMakeFiles/cudnn_test.dir
