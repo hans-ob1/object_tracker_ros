@@ -143,10 +143,6 @@ KalmanFilter create_kalmanTracker(){
 	return kf;
 }
 
-
-
-
-
 // hieuristic function 
 float calculate_iou(cv::Point2f tl_a, cv::Point2f tl_b, cv::Point2f br_a, cv::Point2f br_b){
 
